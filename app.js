@@ -6,10 +6,6 @@ const sgMail = require("@sendgrid/mail");
 const bodyParser = require("body-parser");
 const path = require("path");
 
-process.env.api;
-
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
 const app = express();
 
 const port = process.env.PORT || 8080;
@@ -26,13 +22,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-const transporter = nodemailer.createTransport(
-  sgTransport({
-    auth: {
-      api_key: process.env.ApiKey
-    }
-  })
-);
+sgMail.setApiKey(process.env.ApiKey);
 
 app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname + "/dist/try/index.html"));
@@ -43,6 +33,8 @@ app.post("/send", function(req, res) {
   let email = req.body.contactFormEmail;
   let subject = req.body.contactFormSubjects;
   let text = req.body.contactFormMessage;
+  let html = <strong>text</strong>;
+
   let copyToSender = req.body.contactFormCopy;
 
   if (name === "") {
@@ -90,7 +82,7 @@ app.post("/send", function(req, res) {
     replyTo: from
   };
 
-  transporter.sendMail(message, (error, response) => {
+  sgMail.send(message, (error, response) => {
     if (error) {
       console.log(error);
       res.end("error");
@@ -99,15 +91,6 @@ app.post("/send", function(req, res) {
       res.end("sent");
     }
   });
-  //   sgMail.send(message, (error, response) => {
-  //     if (error) {
-  //       console.log(error);
-  //       res.end("error");
-  //     } else {
-  //       console.log("Message sent: ", response);
-  //       res.end("sent");
-  //     }
-  //   });
 });
 
 app.listen(port, function() {
