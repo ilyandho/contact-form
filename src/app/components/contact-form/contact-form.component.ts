@@ -35,7 +35,6 @@ export class ContactFormComponent {
   }
 
   onSubmit() {
-    console.log(this.contactForm.value);
     this.connectionService.sendMessage(this.contactForm.value).subscribe(
       () => {
         alert("Your message has been sent.");
