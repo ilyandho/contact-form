@@ -43,7 +43,7 @@ export class ContactFormComponent {
         this.disabledSubmitButton = true;
       },
       error => {
-        console.log("Error", error);
+        alert("Error: " + error);
       }
     );
   }

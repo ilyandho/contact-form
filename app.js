@@ -33,8 +33,7 @@ app.post("/send", function(req, res) {
   let email = req.body.contactFormEmail;
   let subject = req.body.contactFormSubjects;
   let text = req.body.contactFormMessage;
-  let html = <strong>text</strong>;
-
+  let html = `<strong>${text}</strong>`;
 
   let copyToSender = req.body.contactFormCopy;
 
@@ -86,10 +85,10 @@ app.post("/send", function(req, res) {
 
   sgMail.send(message, (error, response) => {
     if (error) {
-      console.log(error);
+      //console.log(error);
       res.end("error");
     } else {
-      console.log("Message sent: ", response);
+      //console.log("Message sent: ", response);
       res.end("sent");
     }
   });
