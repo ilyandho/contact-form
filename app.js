@@ -35,6 +35,7 @@ app.post("/send", function(req, res) {
   let text = req.body.contactFormMessage;
   let html = <strong>text</strong>;
 
+
   let copyToSender = req.body.contactFormCopy;
 
   if (name === "") {
@@ -79,6 +80,7 @@ app.post("/send", function(req, res) {
     to: process.env.email,
     subject: subject,
     text,
+    html,
     replyTo: from
   };
 
