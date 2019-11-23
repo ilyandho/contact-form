@@ -29,8 +29,8 @@ export class ContactFormComponent {
         Validators.compose([Validators.required, Validators.email])
       ],
       contactFormSubjects: ["", Validators.required],
-      contactFormMessage: ["", Validators.required],
-      contactFormCopy: [""]
+      contactFormMessage: ["", Validators.required]
+      // contactFormCopy: [""]
     });
   }
 

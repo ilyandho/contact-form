@@ -35,7 +35,7 @@ app.post("/send", function(req, res) {
   let text = req.body.contactFormMessage;
   let html = `<strong>${text}</strong>`;
 
-  let copyToSender = req.body.contactFormCopy;
+  //let copyToSender = req.body.contactFormCopy;
 
   if (name === "") {
     res.status(400);
@@ -69,9 +69,9 @@ app.post("/send", function(req, res) {
     return;
   }
 
-  if (copyToSender) {
-    mailOptions.to.push(senderEmail);
-  }
+  // if (copyToSender) {
+  //   mailOptions.to.push(senderEmail);
+  // }
 
   const from = name && email ? `${name} <${email}>` : `${name || email}`;
   const message = {
